@@ -1,0 +1,95 @@
+# Dataset reader arguments
+dataset:
+  word_counts_json: "okvqa/word_count2.json"
+  glove_vec_path: "okvqa/glove300dvocab2.npy"
+
+  max_question_length: 25
+
+  img_norm: 1
+  vocab_min_count: 1
+
+ 
+  
+# Model related arguments
+model:
+  img_feature_size: 2048
+  word_embedding_size: 300
+  lstm_hidden_size: 512
+  lstm_num_layers: 2
+  dropout: 0.5
+
+  glove_embedding_size: 300
+
+  #question to vis node attention 1
+  node_att_ques_img_proj_dims: 2048
+
+  #question to vis relation attention 1
+  vis_relation_dims: 7
+  rel_att_ques_rel_proj_dims: 512
+  #question to semantic node attention 1
+  sem_node_dims: 300
+  sem_node_att_ques_img_proj_dims: 512
+  #question to semantic relation attention 1
+  sem_relation_dims: 300
+  sem_rel_att_ques_rel_proj_dims: 512
+  #question to fact node attention 1
+  fact_node_dims: 300
+  fact_node_att_ques_node_proj_dims: 512
+
+  # image_gcn1
+  image_gcn1_out_dim: 1024
+  #semantic gcn1
+  semantic_gcn1_out_dim: 300
+  # fact gcn1
+  fact_gcn1_out_dim: 300
+  # cross_gcn1
+  cross_gcn1_out_dim: 300
+  cross_gcn1_img_att_proj_dim: 300
+  cross_gcn1_sem_att_proj_dim: 300
+  cross_gcn1_gate_dim: 128
+
+
+  #question to vis node attention 2
+  node_att_ques_img_proj_dims2: 300
+  #question to vis relation attention 2
+  rel_att_ques_rel_proj_dims2: 300
+  #question to semantic node attention 2
+  sem_node_att_ques_img_proj_dims2: 512
+  #question to semantic relation attention 2
+  sem_rel_att_ques_rel_proj_dims2: 512
+  #question to fact node attention 2
+  fact_node_att_ques_node_proj_dims2: 300
+
+
+  # image_gcn2
+  image_gcn2_out_dim: 300
+  #semantic gcn2
+  semantic_gcn2_out_dim: 300
+  # fact gcn2
+  fact_gcn2_out_dim: 300
+  # cross_gcn2
+  cross_gcn2_out_dim: 300
+  cross_gcn2_img_att_proj_dim: 300
+  cross_gcn2_sem_att_proj_dim: 300
+  cross_gcn2_gate_dim: 300
+
+  #question to fact node attention 3
+  fact_node_att_ques_node_proj_dims3: 300
+  # fact gcn3
+  fact_gcn3_out_dim: 128
+
+
+ 
+# Optimization related arguments
+solver:
+  batch_size: 40
+  num_epochs: 10
+  initial_lr: 0.0001
+  lr_gamma: 0.7
+  lr_milestones:
+    - 5
+    - 7
+    - 10
+  warmup_factor: 0.2
+  warmup_epochs: 2
+  eta_min: 0.00034
