@@ -1,0 +1,26 @@
+Retrieval:
+  top_n: 100
+  retrieval_method: ave_glove_embeddings
+  score_f: consine
+  parent_path: /cw/liir/NoCsBack/testliir/datasets/
+  use_pretrained_embeddings: True
+  fact_path: KR_VQR/all_fact_list.json
+  data_path: KR_VQR/all_data.json
+  all_entities_path: KR_VQR/all_entity.json
+  all_relations_path: KR_VQR/all_relation.json
+  word_count_path: KR_VQR/reason_data_triplet_word_count.json
+  embedding_file: KR_VQR/glove.42B.300d/glove.42B.300d.txt
+  out_path: retrieval_out_filter_words_check.json
+  fine_tune_embeddings: False
+  facts_embedding_path: fact_embedding.pt
+  word_embed_size: 300
+  write_to_json: True
+  return_facts: False
+  num_questions: 0
+  use_key_words: True
+  words_filter: True
+  num_output_sample: 10
+  write_result_to_file: True 
+  select_k: 10
+  result_file: "retrieval_results_test_matcher.txt"
+  use_matcher: True

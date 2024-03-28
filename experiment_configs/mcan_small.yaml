@@ -1,0 +1,70 @@
+ENV:
+  gpus: "'3'"
+EXECUTION:
+  name: MCANExecution
+  resume: False
+  loaded_checkpoint_path: None
+  log_path: train_info_{version}.txt
+  version: bufeat_kg
+  save_path: checkpoints_{version}/
+  outpu_steps: 10
+  run_mode: train
+
+MODEL:
+  name: MCANet
+  num_layers: 6
+  hidden_size: 512
+  hidden_size_head: 64
+  img_loc_size: 5
+  word_embed_size: 300
+  vocab_size: 12941
+  parent_path: /cw/liir/NoCsBack/testliir/datasets/
+  word2index_path: KR_VQR/word2index.json
+  rnn_num_layers: 2
+  img_feat_size: 2048
+  flat_mlp_size: 512
+  flat_out_size: 1024
+  mid_size: 2048
+  answer_size: 307
+  multi_head: 8
+  dropout_r: 0.1
+  eps: 1e-9
+  flat_glimpses: 1
+  token_size : 4932
+  use_glove_emb: True
+  experimental_setup: kg_include
+  pretrained_word_path: KR_VQR/glove.42B.300d/glove.42B.300d.npy
+  fine_tune: False
+
+OPTIM:
+  lr_base: 0.0001
+  #lr_decay_r: 0.2
+  lr_scheduler: warmup
+  grad_accu_steps: 1
+  ckpt_version: small
+  opt_betas: (0.9, 0.98)
+  opt_eps: 1e-9
+  step: 2
+  step2: 20
+
+DATA:
+  name: MCANDataset
+  candidate_answer_path: KR_VQR/balance_candidate_answers.json
+  img_feature_path: /export/home2/NoCsBack/hci/mingxiao/feats/vg_objects.lmdb
+  use_kb: True
+  only_kb_related: True
+  only_kb_not_related: False
+  only_q_type: None
+  kg_path: KR_VQR/all_fact_list.json
+  top_k_kg: 10
+  load_retrieval_kg: True
+  retrieval_kg_path: KR_VQR/retrieval_out.json
+  max_region: 37
+  max_seq_len: 32
+  facts_len: 100
+  batch_size: 128
+  valid_batch_size: 128
+  path: KR_VQR/clean_balance_{split}.json
+  load_test_set: False
+  word_count_path: KR_VQR/reason_data_triplet_word_count.json
+  kg_to_lang_path: KR_VQR/knowledge_triplet_language.json

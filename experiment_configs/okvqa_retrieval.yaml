@@ -1,0 +1,16 @@
+Retrieval:
+  top_n: 100
+  word_embed_size: 300
+  question_path: /cw/liir/NoCsBack/testliir/datasets/OK_VQA/okvqa_question_index2ques.json
+  cn_path: /cw/liir/NoCsBack/testliir/datasets/OK_VQA/knowledge_base/cn_kb.json
+  db_path: /cw/liir/NoCsBack/testliir/datasets/OK_VQA/knowledge_base/db_kb.json
+  hp_path: /cw/liir/NoCsBack/testliir/datasets/OK_VQA/knowledge_base/hp_kb.json
+  vg_path: /cw/liir/NoCsBack/testliir/datasets/OK_VQA/knowledge_base/vg_kb.json
+  parent_path: /cw/liir/NoCsBack/testliir/datasets/
+  word_count_path: OK_VQA/word_count.json
+  coco_img_info:  /cw/liir/NoCsBack/testliir/datasets/OK_VQA/coco_img_obj_info_for_okvqa.json
+  coco_objects: /cw/liir/NoCsBack/testliir/datasets/OK_VQA/coco_obj.json
+  embedding_file: /cw/liir/NoCsBack/testliir/datasets/OK_VQA/glove.42B.300d/glove.42B.300d.txt
+  output_file: retrieval_result_novg_allwords.json
+  
+  

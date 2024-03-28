@@ -1,0 +1,100 @@
+ENV:
+  gpus: "'2'"
+EXECUTION:
+  name: GExecution
+  resume: False 
+  loaded_checkpoint_path: None 
+  log_path: train_info_folder/train_info_{version}.txt
+  version: Unit_test_gt_scene_gat
+  save_path: checkpoints/checkpoints_{version}/
+  output_steps: 10
+  ren_mode: train
+
+MODEL:
+  name: GATMergeQuestionG
+  vocab_size: 12941
+  embeded_size: 300 
+  img_feat_size: 2048
+  img_loc_size: 5
+  max_img_node_len: 2  # 10 for using scene graph  2 for using predicted symbolic
+  max_img_edge_len: 5  # 10 for using scene graph 5 for using prediceted symbolic
+  max_kg_len: 10 
+  use_glove_emb: True
+  parent_path: /cw/liir/NoCsBack/testliir/datasets/
+  word2index_path: KR_VQR/word2index.json
+  pretrained_word_path: KR_VQR/glove.42B.300d/glove.42B.300d.txt
+  in_dim: 300
+  img_edge_dim: 5
+  img_node_dim: 300 
+  hidden_dim: 512
+  num_heads: 4
+  out_dim: 512
+
+  img_node_att_ques_img_prj_dim: 512
+  img_edge_att_ques_rel_proj_dim: 512
+  
+  kg_node_att_ques_node_proj_dims: 512
+  kg_edge_att_ques_edge_proj_dims: 512
+
+  graph_layer_type: GAT
+
+  num_answer: 6900 
+  use_lang_encoder: False 
+  fine_tune: False 
+  use_scene_graph: True
+  LanguageEncoder:
+    rnn_type: lstm
+    input_size: 300
+    hidden_size: 512
+    num_layers: 2
+    bidirectional: False 
+    dropout: 0.1 
+    output_last_layer: True 
+
+OPTIM:
+  lr_base: 0.0001
+  lr_scheduler: warmup
+  grad_accu_step: 1
+  opt_betas: (0.9, 0.98)
+  opt_eps: 1e-9
+  step: 2
+  step2: 20
+
+DATA:
+  name: GraphDataset
+  candidate_answer_path: KR_VQR/candidate_answers.json
+  img_feature_path: /export/home2/NoCsBack/hci/mingxiao/feats/vg_object_cls.lmdb
+  max_region: 36
+  max_num_img_node: 80
+  max_img_node_len: 2  # 10 for using scene graph  2 for using predicted symbolic
+  max_num_img_edge: 180
+  max_img_edge_len: 5  # 10 for using scene graph 5 for using prediceted symbolic
+  max_seq_len: 32
+  k_nearest: 5
+  split: train 
+  path: KR_VQR/{split}_krvqr.json
+  ori_region_loc: True
+  load_retrieval_kg: True 
+  max_kg_ele_len: 10
+  word_count_path: KR_VQR/reason_data_triplet_word_count.json
+  use_symbolic: True
+  kg_path: KR_VQR/all_fact_list.json
+  retrieval_kg_path: KR_VQR/retrieval_out.json
+  top_k_kg: 10
+  kg_to_lang_path: KR_VQR/knowledge_triplet_language.json
+  word2index_path: KR_VQR/word2index.json
+  valid_batch_size: 128
+  use_scene_graph: True
+  scene_graph_path: KR_VQR/vg_scene_graph.json
+  use_lang_graph: False
+  object_path: KR_VQR/rcnn_objects.json
+  synset_path: KR_VQR/synsets.json
+  use_gt_sg: False
+  put_answer_in_graph: False 
+  ge_scene_graph_info: visual_genome/GeneratedSceneGraph/vg_pred_info.json  
+  ge_scene_graph: visual_genome/GeneratedSceneGraph/vg_pred_sg.h5
+ANALYSIS:
+  dataset: "valid"
+  output_path: ""
+  state_dict_path: ""
+

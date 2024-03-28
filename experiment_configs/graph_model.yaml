@@ -1,0 +1,74 @@
+ENV:
+  gpus: "'2'"
+EXECUTION:
+  name: CGRMExecution
+  resume: False 
+  loaded_checkpoint_path: None 
+  log_path: train_info_{version}.txt
+  version: CGRM_LSTM_5kg
+  save_path: checkpoints_{version}/
+  output_steps: 10
+  ren_mode: train
+
+MODEL:
+  name: CGRM
+  vocab_size: 12941
+  embeded_size: 300
+  parent_path: /cw/liir/NoCsBack/testliir/datasets/
+  pretrained_word_path: KR_VQR/glove.42B.300d/glove.42B.300d.txt
+  word2index_path: KR_VQR/word2index.json
+  img_size: 2048
+  img_loc_size: 5
+  kg_size: 300  
+  hidden_size: 1024
+  att_fuse_method: add 
+  max_kg_ele_len: 10 
+  pred_mid_size: 2048
+  num_answer: 6900
+  pre_head_dropout: 0
+  use_glove_emb: True 
+  use_lang_encoder: False
+  max_kg_nodes: 20
+  max_kg_edges: 40
+  max_img_nodes: 36
+  max_img_edges: 180
+  max_seq_len: 32
+  LanguageEncoder:
+    rnn_type: lstm 
+    input_size: 300
+    hidden_size: 1024
+    num_layers: 2
+    bidirectional: False 
+    dropout: 0.1
+    output_last_layer: True
+
+
+
+DATA:
+  name: GraphDataset
+  candidate_answer_path: KR_VQR/candidate_answers.json
+  img_feature_path: /export/home2/NoCsBack/hci/mingxiao/feats/vg_objects.lmdb
+  max_region: 36
+  max_num_img_node: 80
+  max_img_node_len: 10
+  max_num_img_edge: 100
+  max_img_edge_len: 10
+  max_seq_len: 32
+  k_nearest: 5
+  split: train 
+  path: KR_VQR/{split}_krvqr.json
+  ori_region_loc: True
+  load_retrieval_kg: True 
+  num_kg_entity: 10
+  max_kg_ele_len: 10
+  word_count_path: KR_VQR/reason_data_triplet_word_count.json
+  use_symbolic: False
+  kg_path: KR_VQR/all_facts_list_just_empty_entity.json
+  retrieval_kg_path: KR_VQR/retrieval_out.json
+  top_k_kg: 5
+  kg_to_lang_path: KR_VQR/knowledge_triplet_language.json
+  word2index_path: KR_VQR/word2index.json
+  valid_batch_size: 128
+
+    
+      

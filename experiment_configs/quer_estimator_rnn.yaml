@@ -1,0 +1,60 @@
+ENV:
+  gpus: "'3'"
+
+EXECUTION:
+  name: QuesEstExecution
+  resume: False
+  loaded_checkpoint_path: None
+  log_path: train_info_{version}.txt
+  version: ques_esti_rnn_utis_order
+  save_path: checkpoints_{version}/
+  output_steps: 10
+  run_mode: train
+  is_valid: True
+  show_valid_words: False
+MODEL:
+  name: Seq2Seq
+  use_glove: False
+  encoder:
+    name: RnnEncoder
+    use_glove_emb: False
+    rnn_type: lstm
+    vocab_size: 12941
+    embeded_size: 300
+    input_size: 300
+    hidden_size: 512
+    num_layers: 2
+    bidirectional: False
+    dropout: 0.1
+
+  decoder:
+    name: RnnDecoder
+    rnn_type: lstm
+    vocab_size: 12941
+    input_size: 300
+    embeded_size: 300
+    hidden_size: 512
+    num_layers: 2
+    dropout: 0.1
+    bidirectional: False
+    use_emb_out: False
+
+OPTIM:
+   lr_base: 0.0005
+   lr_scheduler: warmup
+   grad_accu_steps: 1
+   opt_betas: (0.9, 0.98)
+   opt_eps: 1e-9
+   step: 2
+   step2: 20
+
+DATA:
+  name: QueryDataset
+  split: train
+  path: KR_VQR/{split}_krvqr.json
+  rel_to_lang_path: KR_VQR/knowledge_triplet_language.json
+  word_count_path: KR_VQR/reason_data_triplet_word_count.json
+  batch_size: 128
+  max_seq_len: 32
+  shuffle: True
+  valid_batch_size: 1
